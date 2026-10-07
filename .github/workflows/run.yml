@@ -10,6 +10,8 @@ on:
       - "**/README.md"
 jobs:
   build:
+    # Disabled in this fork; sync-upstream.yml owns updates and preserves files.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
