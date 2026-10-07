@@ -1,0 +1,65 @@
+name: Sync upstream (keep deleted files)
+
+on:
+  schedule:
+    - cron: '23 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: upstream-sync-keep-files
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'chitanda233/meta-rules-dat'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: [master, sing, meta, release]
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          fetch-depth: 1
+      - name: Copy upstream additions and updates without deletions
+        env:
+          SYNC_BRANCH: ${{ matrix.branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          upstream_url='https://github.com/MetaCubeX/meta-rules-dat.git'
+          # An upstream branch/repository removal must never remove fork data.
+          if ! git ls-remote --exit-code --heads "$upstream_url" "refs/heads/$SYNC_BRANCH" >/dev/null; then
+            echo "::warning::Upstream unavailable or branch missing; retaining fork unchanged."
+            exit 0
+          fi
+          git fetch --no-tags --depth=1 "$upstream_url" "refs/heads/$SYNC_BRANCH"
+          upstream_sha="$(git rev-parse FETCH_HEAD)"
+          snapshot_dir="$(mktemp -d)"
+          trap 'rm -rf "$snapshot_dir"' EXIT
+          git archive "$upstream_sha" | tar -x -C "$snapshot_dir"
+          # No --delete: files absent upstream remain in this fork.
+          # Never import upstream workflows or replace this workflow.
+          rsync -a --checksum --exclude='/.git/' --exclude='/.github/' "$snapshot_dir/" ./
+          git add -A -- . ':!.github'
+          # Abort before committing/pushing if a file/directory replacement
+          # would indirectly delete any retained file.
+          if [[ -n "$(git diff --cached --name-only --diff-filter=D)" ]]; then
+            echo "::error::Copy would delete existing files. No changes were pushed."
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "No upstream additions or updates."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Sync upstream $SYNC_BRANCH at $upstream_sha (keep deleted files)"
+          # Only push to this fork. Never force-push or write to upstream.
+          git push origin "HEAD:refs/heads/$SYNC_BRANCH"
