@@ -6,6 +6,8 @@ on:
 
 jobs:
   del_runs:
+    # Disabled in this fork; sync-upstream.yml owns updates and preserves files.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Delete workflow runs
