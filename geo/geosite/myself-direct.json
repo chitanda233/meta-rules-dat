@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "npc.moe",
+        "gray.moe",
+        "just233.com",
+        "schwab.com",
+        "thinkorswim.com",
+        "ultramobile.com",
+        "ultra.me",
+        "kaka-tech.com",
+        "sccncdn.com"
+      ]
+    }
+  ]
+}
