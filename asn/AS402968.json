@@ -2,7 +2,7 @@
   "version": 2,
   "rules": [
     {
-      "ip_cidr": "2602:f2ff:2::/47"
+      "ip_cidr": "2602:f2ff:2::/48"
     }
   ]
 }
