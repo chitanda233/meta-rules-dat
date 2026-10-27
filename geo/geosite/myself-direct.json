@@ -21,12 +21,19 @@
         "za.group",
         "zajourney.com",
         "zainvest.group",
-        "zaticdn.com"
+        "zaticdn.com",
+        "dito.ph"
       ],
       "domain": [
         "mdhn5j.cdn-settings.appsflyersdk.com",
         "mdhn5j.inapps.appsflyersdk.com",
         "mdhn5j.launches.appsflyersdk.com"
+      ],
+      "ip_cidr": [
+        "131.226.93.135/32",
+        "131.226.93.136/32",
+        "131.226.93.137/32",
+        "131.226.93.138/32"
       ]
     }
   ]
