@@ -6,5 +6,6 @@
 |---|---|---|
 | 强制直连 | [myself-direct.json](myself-direct.json) | [myself-direct.srs](myself-direct.srs) |
 | 代理 | [myself-proxy.json](myself-proxy.json) | [myself-proxy.srs](myself-proxy.srs) |
+| 富途 | [futu.json](futu.json) | [futu.srs](futu.srs) |
 
-注意：`sing` 分支的 `geo/geosite/` 目录仍保留运行时兼容副本。修改规则时需要同步维护两处文件。
+`myself-direct` 和 `myself-proxy` 在 `sing` 分支的 `geo/geosite/` 目录仍保留运行时兼容副本。修改这两组规则时需要同步维护两处文件。
