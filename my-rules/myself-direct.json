@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "npc.moe",
+        "gray.moe",
+        "just233.com",
+        "schwab.com",
+        "thinkorswim.com",
+        "ultramobile.com",
+        "ultra.me",
+        "kaka-tech.com",
+        "sccncdn.com",
+        "aboutschwab.com",
+        "schwabassetmanagement.com",
+        "schwabplan.com",
+        "schwab.co.uk",
+        "schwab.com.hk",
+        "schwab.com.sg",
+        "za.group",
+        "zajourney.com",
+        "zainvest.group",
+        "zaticdn.com",
+        "dito.ph",
+        "maya.ph",
+        "paymaya.com",
+        "mayabank.ph",
+        "rag.moplaygame.com"
+      ],
+      "domain": [
+        "mdhn5j.cdn-settings.appsflyersdk.com",
+        "mdhn5j.inapps.appsflyersdk.com",
+        "mdhn5j.launches.appsflyersdk.com"
+      ],
+      "ip_cidr": [
+        "131.226.93.135/32",
+        "131.226.93.136/32",
+        "131.226.93.137/32",
+        "131.226.93.138/32",
+        "18.140.194.9/32",
+        "54.179.96.150/32",
+        "46.137.225.171/32",
+        "13.251.180.11/32",
+        "52.74.222.228/32",
+        "52.76.49.45/32"
+      ]
+    },
+    {
+      "ip_cidr": [
+        "101.33.229.28/32"
+      ]
+    }
+  ]
+}
